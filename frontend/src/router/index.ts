@@ -33,6 +33,7 @@ import Score_eva from '@/views/Committee/Score_eva.vue'
 import Save_score from '@/views/Committee/Save_score.vue'
 import Signature from '@/views/Committee/Signature.vue'
 import Signature_save from '@/views/Committee/Signature_save.vue'
+import Score_commit from '@/views/Committee/Score_commit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -86,6 +87,11 @@ const router = createRouter({
           path: '/Signature_save/:id_eva',
           name: 'Signature_save',
           component: Signature_save,
+        },
+        {
+          path: '/Score_commit/:id_eva',
+          name: 'Score_commit',
+          component: Score_commit,
         },
       ]
     },
