@@ -47,6 +47,7 @@ const fetchTopic = async () =>{
             headers:{Authorization:`Bearer ${token}`}
         })
         topics.value = res.data
+        console.log(res.data)
     }catch(err){
         console.error('โหลดข้อมูลผู้ประเมินไม่สำเร็จ',err)
     }

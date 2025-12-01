@@ -19,11 +19,11 @@ router.get('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร
 
 router.get('/indicate/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
-        // const id_member = req.user.id_member
-        // const [[evaRow]] = await db.query(`select * from tb_member m,tb_eva e,tb_system s where e.id_member=? and e.id_member=m.id_member and e.id_sys=s.id_sys and status_sys=? order by e.id_eva desc`,
-        //     [id_member,'y']
-        // )
         const {id_eva} = req.params
+        const [[evaRow]] = await db.query(`select * from tb_member m,tb_eva e,tb_system s where e.id_eva=? and e.id_member=m.id_member and e.id_sys=s.id_sys and status_sys=? order by e.id_eva desc`,
+            [id_eva,'y']
+        )
+        
         const [topics] = await db.query(`select * from tb_topic`)
         const [indicates] = await db.query(`select * from tb_indicate i,tb_evadetail d where i.id_indicate=d.id_indicate and d.status_eva=? and d.id_eva=?`,
             [1,id_eva]

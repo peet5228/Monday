@@ -38,7 +38,7 @@ router.post('/',verifyToken,async (req,res) => {
         const id_member = req.user.id_member
         const scores = JSON.parse(req.body.scores)
         const fileMap = {}
-        await Promise.all(Object.entries(req.files).map(async ([key,file]) =>{
+        await Promise.all(Object.entries(req.files|| {}).map(async ([key,file]) =>{
             const filename = Date.now()+Math.random().toString(36).slice(2)+path.extname(file.name)
             await file.mv(path.join(uploadDir,filename))
             fileMap[key] = filename

@@ -48,7 +48,7 @@
                                 </td>
                             </tr>
                             <tr class="" v-if="result.length === 0">
-                                <td class="text-center text-gray-500 border" colspan="8">ไม่พบข้อมูล</td>
+                                <td class="text-center text-gray-500 border" colspan="8">จะแสดงเฉพาะแบบประเมินที่ยังไม่ได้มีการประเมิน</td>
                             </tr>
                         </tbody>
                     </v-table>

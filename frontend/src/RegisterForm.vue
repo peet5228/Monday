@@ -30,7 +30,7 @@
                                 <v-select v-model="form.role" :items="roles" item-title="text" item-value="value" :error-messages="error.role" label="เลือกประเภทสมาชิก"></v-select>
                             </v-col>
                             <v-col cols="12" class="text-center">
-                                <v-btn type="submit" class="btn-maroon text-white">สมัคร</v-btn>
+                                <v-btn type="submit" class="btn-maroon text-white w-full">สมัคร</v-btn>
                                 <p class="text-center text-sm mt-2">มีบัญชีอยู๋แล้ว? <router-link to="/login" class="text-maroon"><u>เข้าสู่ระบบ</u></router-link></p>
                             </v-col>
                         </v-row>
@@ -58,7 +58,7 @@ const form = ref({
 const confirmPassword = ref('')
 const error = ref<Record<string,string>>({})
 const roles = [
-    {text:'ฝ่ายบุคลากร',value:'ฝ่ายบุคลากร'},
+    // {text:'ฝ่ายบุคลากร',value:'ฝ่ายบุคลากร'},
     {text:'กรรมการประเมิน',value:'กรรมการประเมิน'},
     {text:'ผู้รับการประเมินผล',value:'ผู้รับการประเมินผล'},
 ]
