@@ -31,6 +31,9 @@ app.use('/api/Commit/score_eva',score_eva)
 const save_score = require('./routes/Commit/save_score')
 app.use('/api/Commit/save_score',save_score)
 
+const signature = require('./routes/Commit/signature')
+app.use('/api/Commit/signature',signature)
+
 const dashboard = require('./routes/dashboard')
 app.use('/api/dashboard',dashboard)
 
