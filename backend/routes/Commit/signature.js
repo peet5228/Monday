@@ -6,13 +6,29 @@ const router = express.Router()
 const uploadDir = path.join(__dirname,'../../uploads/signature')
 const {verifyToken,requireRole} = require('../../middleware/authMiddleware')
 
-// API สำหรับ Upload ข้อมูล
-router.post('/',verifyToken,async (req,res) => {
+router.get('/:id_eva',verifyToken,async (req,res) => {
     try{
+        const id_member = req.user.id_member
+        const id_eva = req.params.id_eva
+        const [rows] = await db.query(`select * from tb_member m,tb_eva e,tb_system s,tb_commit c where c.id_member=? and c.id_eva=? and c.id_eva=e.id_eva and e.id_member=m.id_member and e.id_sys=s.id_sys and status_sys=? order by e.id_eva desc`,
+            [id_member,id_eva,'y']
+        )
+        res.json(rows[0])
+    }catch(err){
+        console.error('Error Profile',err)
+        res.status(500).json({message:'Error Profile'})
+    }
+})
+
+// API สำหรับ Upload ข้อมูล
+router.post('/:id_eva',verifyToken,async (req,res) => {
+    try{
+        const id_member = req.user.id_member
+        const id_eva = req.params.id_eva
         const file = req.files?.file
         const filename = Date.now() + path.extname(file.name).toLowerCase()
         await file.mv(path.join(uploadDir,filename))
-        await db.query(`update tb_commit set signature=? where id_eva=? and id_member=?`,[filename])
+        await db.query(`update tb_commit set signature=? where id_eva=? and id_member=?`,[filename,id_eva,id_member])
         res.status(201).json({message:'Upload Success'})
     }catch(err){
         console.error("Error Upload",err)
@@ -21,15 +37,16 @@ router.post('/',verifyToken,async (req,res) => {
 })
 
 // API สำหรับ Delete ข้อมูล
-router.delete('/:id_doc',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.delete('/:id_eva',verifyToken,async (req,res) => {
     try{
-        const {id_doc} = req.params
-        const [[doc]] = await db.query(`select file from tb_doc where id_doc='${id_doc}'`)
-        const fp = path.join(uploadDir,doc.file)
+        const id_eva = req.params.id_eva
+        const id_member = req.user.id_member
+        const [[commit]] = await db.query(`select signature from tb_commit where id_eva=? and id_member=?`,[id_eva,id_member])
+        const fp = path.join(uploadDir,commit.signature)
         if(fs.existsSync(fp)){
             fs.unlinkSync(fp)
         }
-        await db.query(`delete from tb_doc where id_doc='${id_doc}'`)
+        await db.query(`update tb_commit set signature=? where id_eva=? and id_member=?`,[null,id_eva,id_member])
         res.json({message:'Delete Success'})
     }catch(err){
         console.error("Error Delete",err)
