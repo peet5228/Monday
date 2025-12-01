@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-app-bar color="#7d0c14" class="py-2">
+        <v-app-bar color="#7d0c14" class="py-2 no-print">
             <v-app-bar-nav-icon @click="drawer = !drawer" variant="text"></v-app-bar-nav-icon>
             <v-toolbar-title>ระบบประเมินบุคลากรวิทยาลัยเทคนิคน่าน</v-toolbar-title>
             <div>ผู้ใช้งาน : {{ user.first_name }} {{ user.last_name }} <br> {{ user.role }}</div>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,5 +83,12 @@ onMounted(fetchUser)
 </script>
 
 <style scoped>
-
+@media print {
+    .v-navigation-drawer,
+    .v-app-bar,
+    .v-btn,
+    nav {
+        display: none !important;
+    }
+}
 </style>

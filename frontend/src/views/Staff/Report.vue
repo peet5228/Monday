@@ -5,7 +5,7 @@
                     <br>
                     <v-row>
                         <v-col cols="12" md="4">
-                            <router-link to=""><v-card class="pa-4" elevation="3"></v-card></router-link>
+                            <router-link to="reEva"><v-card class="pa-4" elevation="3"><p class="text-h4 font-weight-bold">ผู้รับการประเมินผล</p></v-card></router-link>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -63,4 +63,6 @@ onMounted(fetch)
 .text-maroon{
     color: #7d0c14;
 }
+
+
 </style>
