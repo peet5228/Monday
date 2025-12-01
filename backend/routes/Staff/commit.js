@@ -33,7 +33,7 @@ router.get('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร
     try{
         const {id_eva} = req.params
         const [before] = await db.query(`select id_member,concat(first_name,' ',last_name)as fullname_commit from tb_member where role='กรรมการประเมิน' order by id_member desc `)
-        const [after] = await db.query(`select id_commit,tb_member.id_member,firat_name,last_name,level_coommit as role from tb_member,tb_commit,tb_eva where tb_commit.id_eva='${id_eva}' and tb_eva.id_eva=tb_commit.id_eva and tb_commit.id_member=tb_member.id_member`)
+        const [after] = await db.query(`select id_commit,tb_member.id_member,first_name,last_name,level_commit as role from tb_member,tb_commit,tb_eva where tb_commit.id_eva='${id_eva}' and tb_eva.id_eva=tb_commit.id_eva and tb_commit.id_member=tb_member.id_member`)
         res.json({before,after})
     }catch(err){
         console.error("Error Get",err)
@@ -41,13 +41,13 @@ router.get('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร
     }
 })
 
-// API สำหรับ Get ข้อมูล
+// API สำหรับ Insert ข้อมูล
 router.post('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_eva} = req.params
         await db.query(`delete from tb_commit where id_eva='${id_eva}'`)
         const commit = req.body
-        const values = commit.value(p => [c.id_member,c.role,id_eva,'n'])
+        const values = commit.map(c => [c.id_member,id_eva,c.role,'n'])
         await db.query(`insert into tb_commit (id_member,id_eva,level_commit,status_commit) values ?`,[values])
         res.json({message:'Insert Success'})
     }catch(err){

@@ -20,6 +20,9 @@ app.use('/api/auth',auth)
 const profile = require('./routes/profile')
 app.use('/api/profile',profile)
 
+const dashboard = require('./routes/dashboard')
+app.use('/api/dashboard',dashboard)
+
 //eva
 const me = require('./routes/Eva/me')
 app.use('/api/Eva/me',me)
@@ -48,6 +51,12 @@ app.use('/api/Staff/eva',eva)
 
 const commit = require('./routes/Staff/commit')
 app.use('/api/Staff/commit',commit)
+
+const statusCommit = require('./routes/Staff/statusCommit')
+app.use('/api/Staff/statusCommit',statusCommit)
+
+const document = require('./routes/Staff/document')
+app.use('/api/Staff/document',document)
 
 app.use((req,res) => res.status(404).json({message:'ปิดปรับปรุง'}))
 
