@@ -33,6 +33,7 @@ const drawer = ref(false)
 const user = ref({})
 const token = localStorage.getItem('token')
 const logout = async () =>{
+    if(!confirm('ต้องการออกจากระบบใช่หรือไม่'))return
     localStorage.removeItem('token')
     router.push({path:'/login'})
 }
@@ -45,6 +46,9 @@ const roles = [
 
     //eva
     {title:'หน้าหลัก',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
+    {title:'แก้ไขข้อมูลส่วนตัว',to:'/Edit_eva',role:'ผู้รับการประเมินผล'},
+    {title:'แบบประเมินตนเอง',to:'/Selfeva',role:'ผู้รับการประเมินผล'},
+    {title:'ตรวจสอบผลการประเมิน',to:'/Check_score',role:'ผู้รับการประเมินผล'},
 
 ]
 const navitem = computed(() =>
