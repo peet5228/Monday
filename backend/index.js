@@ -58,6 +58,9 @@ app.use('/api/Staff/statusCommit',statusCommit)
 const document = require('./routes/Staff/document')
 app.use('/api/Staff/document',document)
 
+const checkEva = require('./routes/Staff/checkEva')
+app.use('/api/Staff/checkEva',checkEva)
+
 app.use((req,res) => res.status(404).json({message:'ปิดปรับปรุง'}))
 
 app.listen(3001 , () => console.log('Server Running On Port 3001'))

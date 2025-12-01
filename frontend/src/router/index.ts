@@ -24,6 +24,8 @@ import Status_commit from '@/views/Staff/Status_commit.vue'
 import Status2 from '@/views/Staff/Status2.vue'
 import StatusEva from '@/views/Staff/StatusEva.vue'
 import Document from '@/views/Staff/Document.vue'
+import Report from '@/views/Staff/Report.vue'
+import ScoreEva from '@/views/Staff/ScoreEva.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -126,6 +128,11 @@ const router = createRouter({
           component: Score_evaList,
         },
         {
+          path: '/ScoreEva/:id_eva',
+          name: 'ScoreEva',
+          component: ScoreEva,
+        },
+        {
           path: '/Score_commitList',
           name: 'Score_commitList',
           component: Score_commitList,
@@ -149,6 +156,11 @@ const router = createRouter({
           path: '/Document',
           name: 'Document',
           component: Document,
+        },
+        {
+          path: '/Report',
+          name: 'Report',
+          component: Report,
         },
       ]
     },
