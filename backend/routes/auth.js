@@ -22,7 +22,7 @@ router.post('/login',async (req,res) => {
 router.post('/regis',async (req,res) => {
     try{
         const {first_name,last_name,email,username,password,role} = req.body
-        const [rows] = await db.query(`insert into tb_member (first_name,last_name,email,username,password,role) values (?,?,?,?,?,?,?)`,[first_name,last_name,email,username,password,role])
+        const [rows] = await db.query(`insert into tb_member (first_name,last_name,email,username,password,role) values (?,?,?,?,?,?)`,[first_name,last_name,email,username,password,role])
         res.json(rows)
     }catch(err){
         console.error("Error Register",err)
