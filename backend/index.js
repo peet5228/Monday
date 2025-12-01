@@ -20,6 +20,16 @@ app.use('/api/auth',auth)
 const profile = require('./routes/profile')
 app.use('/api/profile',profile)
 
+//Commit
+const show_eva = require('./routes/Commit/show_eva')
+app.use('/api/Commit/show_eva',show_eva)
+
+const score_eva = require('./routes/Commit/score_eva')
+app.use('/api/Commit/score_eva',score_eva)
+
+const save_score = require('./routes/Commit/save_score')
+app.use('/api/Commit/save_score',save_score)
+
 //eva
 const me = require('./routes/Eva/me')
 app.use('/api/Eva/me',me)

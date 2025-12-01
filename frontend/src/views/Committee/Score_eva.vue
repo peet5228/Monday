@@ -33,8 +33,12 @@
                             </v-table>
                         </v-col>
                     </v-row>
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <v-alert type="success" class="text-end pa-2">คะแนนรวมสุทธิ : {{ totalScore }} คะแนน</v-alert>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <v-btn v-if="user.status_commit === 'n'" color="blue" class="text-white" @click="add(id_eva)">ประเมิน</v-btn>
+                        <v-btn v-else color="green" class="text-white">ประเมินแล้ว</v-btn>
                     </div>
                 </v-form>
                 <v-alert v-else-if="user.status_eva === 1" type="info">คุณยังไม่ได้กรอกแบบประเมิน</v-alert>
@@ -47,13 +51,19 @@
 <script setup lang="ts">
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { useRouter,useRoute } from 'vue-router';
+const router = useRouter()
+const id_eva = useRoute().params.id_eva
 const token = localStorage.getItem('token')
 const topics = ref([])
 const user = ref({})
 const totalScore = ref(0)
+const add = (id_eva:number) => {
+    router.push({path:`/Save_score/${id_eva}`})
+}
 const fetchUser = async () =>{
     try{
-        const res = await axios.get(`http://localhost:3001/api/Eva/check_eva`,{
+        const res = await axios.get(`http://localhost:3001/api/Commit/score_eva/${id_eva}`,{
             headers:{Authorization:`Bearer ${token}`}
         })
         user.value = res.data
@@ -64,7 +74,7 @@ const fetchUser = async () =>{
 
 const fetchTopic = async () =>{
     try{
-        const res = await axios.get(`http://localhost:3001/api/Eva/check_eva/indicate`,{
+        const res = await axios.get(`http://localhost:3001/api/Commit/score_eva/indicate/${id_eva}`,{
             headers:{Authorization:`Bearer ${token}`}
         })
         topics.value = res.data

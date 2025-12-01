@@ -7,9 +7,11 @@
                                 <th class="border text-center w-1/10">ลำดับ</th>
                                 <th class="border text-center w-1/10">ชื่อ</th>
                                 <th class="border text-center w-1/10">นามสกุล</th>
+                                <th class="border text-center w-1/10">วันที่ออกแบบประเมิน</th>
+                                <th class="border text-center w-1/10">รอบประเมิน</th>
                                 <th class="border text-center w-1/10">คะแนนประเมิน</th>
                                 <th class="border text-center w-1/10">สถานะการประเมิน</th>
-                                <th class="border text-center w-1/10">ตรวจสอบผลการประเมิน</th>
+                                <th class="border text-center w-1/10">ประเมิน</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -17,10 +19,13 @@
                                 <td class="text-center w-1/10 border">{{ index+1 }}</td>
                                 <td class="text-center w-1/10 border">{{ items.first_name }}</td>
                                 <td class="text-center w-1/10 border">{{ items.last_name }}</td>
+                                <td class="text-center w-1/10 border">{{ items.day_eva }}</td>
+                                <td class="text-center w-1/10 border">รอบที่ {{ items.round_sys }}</td>
                                 <td class="text-center w-1/10 border">{{ items.total_eva }} คะแนน</td>
-                                <td class="text-center w-1/10 border">{{ items.status_eva === 1 ? 'ประเมินตนเอง' : items.status_eva === 2 ? 'รอกรรมการปะเมิน' : 'ประเมินเสร็จสิ้น' }}</td>
+                                <td class="text-center w-1/10 border">{{ items.status_eva === 1 ? 'ประเมินตนเอง' : items.status_commit === 'y' ? 'ประเมินสำเร็จ' : items.status_eva === 2 ? 'รอกรรมการปะเมิน' : 'ประเมินเสร็จสิ้น' }}</td>
                                 <td class="text-center w-1/10 border">
-                                    <v-btn color="success" class="text-white" size="small" @click="add(items.id_eva)">ตรวจสอบ</v-btn>
+                                    <v-btn v-if="items.status_commit === 'n'" color="blue" class="text-white" size="small" @click="add(items.id_eva)">ประเมิน</v-btn>
+                                    <v-btn v-else color="green" class="text-white" size="small" >ประเมินแล้ว</v-btn>
                                 </td>
                             </tr>
                             <tr class="" v-if="result.length === 0">
@@ -49,7 +54,7 @@ const fetch = async () => {
     }
 }
 const add = (id_eva:number) => {
-    router.push({path:`/Score_eva/${id_eva}`})
+    router.push({path:`/Save_score/${id_eva}`})
 }
 
 onMounted(fetch)
