@@ -4,10 +4,20 @@ import RegisterForm from '@/RegisterForm.vue'
 import UserLayout from '@/components/UserLayout.vue'
 //eva
 import Evaluatee from '@/views/Evaluatee/index.vue'
+
 import Edit_eva from '@/views/Evaluatee/Edit_eva.vue'
 import Selfeva from '@/views/Evaluatee/Selfeva.vue'
 import Check_score from '@/views/Evaluatee/Check_score.vue'
 import Check_eva from '@/views/Evaluatee/Check_eva.vue'
+
+import Index from '@/views/Staff/index.vue'
+import ManaggeEva from '@/views/Staff/ManageEva.vue'
+import ManageCommit from '@/views/Staff/ManageCommit.vue'
+import Topic from '@/views/Staff/Topic.vue'
+import Indicate from '@/views/Staff/Indicate.vue'
+import Round_eva from '@/views/Staff/Round_eva.vue'
+import Eva from '@/views/Staff/Eva.vue'
+import Eva_commit from '@/views/Staff/Eva_commit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +66,53 @@ const router = createRouter({
           path: '/Check_eva',
           name: 'Check_eva',
           component: Check_eva,
+        },
+      ]
+    },
+    // Staff ======================
+    {
+      path: '/Staff',
+      component: UserLayout,
+      children:[
+        {
+          path: '/Staff',
+          name: 'StaffDashboard',
+          component: Index,
+        },
+        {
+          path: '/ManageEva',
+          name: 'ManageEva',
+          component: ManaggeEva,
+        },
+        {
+          path: '/ManageCommit',
+          name: 'ManageCommit',
+          component: ManageCommit,
+        },
+        {
+          path: '/Topic',
+          name: 'Topic',
+          component: Topic,
+        },
+        {
+          path: '/Indicate',
+          name: 'Indicate',
+          component: Indicate,
+        },
+        {
+          path: '/Round_eva',
+          name: 'Round_eva',
+          component: Round_eva,
+        },
+        {
+          path: '/Eva',
+          name: 'Eva',
+          component: Eva,
+        },
+        {
+          path: '/Eva_commit/:id_eva',
+          name: 'Eva_commit',
+          component: Eva_commit,
         },
       ]
     },

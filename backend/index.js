@@ -30,6 +30,25 @@ app.use('/api/Eva/selfeva',selfeva)
 const check_eva = require('./routes/Eva/check_eva')
 app.use('/api/Eva/check_eva',check_eva)
 
+// Staff ================
+const member = require('./routes/Staff/member')
+app.use('/api/Staff/member',member)
+
+const topic = require('./routes/Staff/topic')
+app.use('/api/Staff/topic',topic)
+
+const indicate = require('./routes/Staff/indicate')
+app.use('/api/Staff/indicate',indicate)
+
+const round_eva = require('./routes/Staff/round_eva')
+app.use('/api/Staff/round_eva',round_eva)
+
+const eva = require('./routes/Staff/eva')
+app.use('/api/Staff/eva',eva)
+
+const commit = require('./routes/Staff/commit')
+app.use('/api/Staff/commit',commit)
+
 app.use((req,res) => res.status(404).json({message:'ปิดปรับปรุง'}))
 
 app.listen(3001 , () => console.log('Server Running On Port 3001'))

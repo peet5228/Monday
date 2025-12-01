@@ -58,7 +58,6 @@ const Login = async () => {
         error.value = error.response?.data?.message || 'เข้าสู่ระบบไม่สำเร็จ'
     }
 }
-
 </script>
 
 <style scoped>
