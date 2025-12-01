@@ -27,6 +27,13 @@ import Document from '@/views/Staff/Document.vue'
 import Report from '@/views/Staff/Report.vue'
 import ScoreEva from '@/views/Staff/ScoreEva.vue'
 
+import Committee from '@/views/Committee/index.vue'
+import Show_eva from '@/views/Committee/Show_eva.vue'
+import Score_eva from '@/views/Committee/Score_eva.vue'
+import Save_score from '@/views/Committee/Save_score.vue'
+import Signature from '@/views/Committee/Signature.vue'
+import Signature_save from '@/views/Committee/Signature_save.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -43,6 +50,44 @@ const router = createRouter({
     {
       path: '/',
       redirect: '/login',
+    },
+
+    //commit
+    {
+      path: '/Committee',
+      component: UserLayout,
+      children:[
+        {
+          path: '/Committee',
+          name: 'Committee',
+          component: Committee,
+        },
+        {
+          path: '/Show_eva',
+          name: 'Show_eva',
+          component: Show_eva,
+        },
+        {
+          path: '/Score_eva/:id_eva',
+          name: 'Score_eva',
+          component: Score_eva,
+        },
+        {
+          path: '/Save_score/:id_eva',
+          name: 'Save_score',
+          component: Save_score,
+        },
+        {
+          path: '/Signature',
+          name: 'Signature',
+          component: Signature,
+        },
+        {
+          path: '/Signature_save/:id_eva',
+          name: 'Signature_save',
+          component: Signature_save,
+        },
+      ]
     },
 
     //eva

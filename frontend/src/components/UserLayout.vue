@@ -56,6 +56,8 @@ const roles = [
 
     //commit
     {title:'รายชื่อผู้รับการประเมินผล',to:'/Committee',role:'กรรมการประเมิน'},
+    {title:'ดำเนินการประเมิน',to:'/Show_eva',role:'กรรมการประเมิน'},
+    {title:'ตรวจการประเมินและยืนยันผล',to:'/Signature',role:'กรรมการประเมิน'},
 
     //eva
     {title:'หน้าหลัก',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
