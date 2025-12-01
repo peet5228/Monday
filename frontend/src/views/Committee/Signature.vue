@@ -10,6 +10,7 @@
                                 <th class="border text-center w-1/10">วันที่ออกแบบประเมิน</th>
                                 <th class="border text-center w-1/10">รอบประเมิน</th>
                                 <th class="border text-center w-1/10">คะแนนประเมิน</th>
+                                <th class="border text-center w-1/10">ตรวจสอบคะแนน</th>
                                 <th class="border text-center w-1/10">ดำเนินการยืนยันผล</th>
                             </tr>
                         </thead>
@@ -21,6 +22,9 @@
                                 <td class="text-center w-1/10 border">{{ items.day_eva }}</td>
                                 <td class="text-center w-1/10 border">รอบที่ {{ items.round_sys }}</td>
                                 <td class="text-center w-1/10 border">{{ items.total_eva }} คะแนน</td>
+                                <td class="text-center w-1/10 border">
+                                    <v-btn color="blue" class="text-white" @click="detail(items.id_eva)" size="small">ตรวจสอบ</v-btn>
+                                </td>
                                 <td class="text-center w-1/10 border">
                                     <v-btn v-if="items.signature" color="green" class="text-white" size="small">ยืนยันผลแล้ว</v-btn>
                                     <v-btn v-else color="blue" class="text-white" size="small" @click="add(items.id_eva)">ยืนยันผล</v-btn>
@@ -50,6 +54,9 @@ const fetch = async () => {
     }catch(err){
         console.error('Error Fetching',err)
     }
+}
+const detail = (id_eva:number) => {
+    router.push({path:`/Score_commit/${id_eva}`})
 }
 const add = (id_eva:number) => {
     router.push({path:`/Signature_save/${id_eva}`})
