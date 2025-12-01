@@ -11,9 +11,31 @@
                     <v-row v-for="(topic,index1) in topics" :key="topic.id_topic" class="mt-4">
                         <v-col cols="12">
                             <h1 class="text-h6 font-weight-bold">{{ index1+1 }}.{{ topic.name_topic }}</h1>
-                            
+                            <v-table>
+                                <thead class="bg-grey">
+                                    <tr>
+                                        <th class="border text-center font-weight-bold">ตัวชี้วัด</th>
+                                        <th class="border text-center font-weight-bold">รายละเอียด</th>
+                                        <th class="border text-center font-weight-bold">น้ำหนักคะแนน</th>
+                                        <th class="border text-center font-weight-bold">คะแนนเต็ม</th>
+                                        <th class="border text-center font-weight-bold">คะแนนที่ได้</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="indicate in topic.indicates" :key="indicate.id_indicate">
+                                        <td class="border text-center">{{ indicate.name_indicate }}</td>
+                                        <td class="border text-center">{{ indicate.detail_indicate }}</td>
+                                        <td class="border text-center">{{ indicate.point_indicate }}</td>
+                                        <td class="border text-center">{{ indicate.point_indicate*4 }}</td>
+                                        <td class="border text-center">{{ indicate.score_member*indicate.point_indicate }}</td>
+                                    </tr>
+                                </tbody>
+                            </v-table>
                         </v-col>
                     </v-row>
+                    <div class="mt-2">
+                        <v-alert type="success" class="text-end pa-2">คะแนนรวมสุทธิ : {{ totalScore }} คะแนน</v-alert>
+                    </div>
                 </v-form>
                 <v-alert v-else-if="user.status_eva === 1" type="info">ยังไม่ได้กรอกแบบประเมิน</v-alert>
                 <v-alert v-else type="warning">ยังไม่มีแบบประเมิน</v-alert>
@@ -47,7 +69,6 @@ const fetchTopic = async () =>{
             headers:{Authorization:`Bearer ${token}`}
         })
         topics.value = res.data
-        console.log(res.data)
     }catch(err){
         console.error('โหลดข้อมูลผู้ประเมินไม่สำเร็จ',err)
     }

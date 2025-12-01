@@ -3,7 +3,11 @@
                 <v-card class="pa-4">
                     <h1 class="text-h5 text-center font-weight-bold text-maroon">รายงาน</h1>
                     <br>
-                    
+                    <v-row>
+                        <v-col cols="12" md="4">
+                            <router-link to=""><v-card class="pa-4" elevation="3"></v-card></router-link>
+                        </v-col>
+                    </v-row>
                 </v-card>
     </v-container>
 </template>
